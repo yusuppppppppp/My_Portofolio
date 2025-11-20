@@ -1,4 +1,12 @@
-import ColorBends from "./components/ColorBends/ColorBends";
+"use client";
+import dynamic from "next/dynamic";
+import ProfileCard from "./components/ProfileCard/ProfileCard";
+import TextType from "./components/TextType/TextType";
+import { LayoutTextFlip } from "./components/UI/layout-text-flip";
+
+const ColorBends = dynamic(() => import("./components/ColorBends/ColorBends"), {
+  ssr: false,
+});
 
 export default function Home() {
   return (
@@ -113,7 +121,7 @@ export default function Home() {
         {/* HERO CONTENT */}
         <div className="relative z-20 mx-auto max-w-5xl px-4 h-screen flex flex-col">
           {/* NAV */}
-          <nav className="mt-10 flex items-center justify-between rounded-full border border-white/10 bg-white/5 px-5 py-3 backdrop-blur">
+          <nav className="mt-7 ml-40 fixed flex align-center items-center justify-between rounded-full border border-white/10 bg-white/5 px-6 py-4 backdrop-blur w-170 z-50">
             <div className="flex items-center gap-3">
               <span className="font-semibold tracking-tight">
                 My Portofolio
@@ -123,32 +131,49 @@ export default function Home() {
               <a href="#" className="hover:text-white">
                 Home
               </a>
+              <a href="#about" className="hover:text-white">
+                About
+              </a>
               <a href="#" className="hover:text-white">
-                Docs
+                My Skill
+              </a>
+              <a href="#" className="hover:text-white">
+                My Project
               </a>
             </div>
           </nav>
 
           {/* HERO LAYOUT */}
-          <div className="flex-1 flex flex-col items-start mt-20">
-            {/* Main Content - Centered */}
-            <div className="w-full max-w-3xl text-start">
+          <div className="flex-1 flex flex-col md:flex-row items-center justify-between mt-17 gap-12">
+            {/* Text Content */}
+            <div className="w-full md:w-1/2 text-start">
               <div className="space-y-6">
                 <div className="space-y-2">
                   <h2 className="text-lg md:text-xl text-white/70 font-medium">
                     Hello, I'm Yusuf.
                   </h2>
-                  <h1 className="text-2xl md:text-4xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-                    Frontend Developer.
+                  <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+                    <TextType
+                      text={[
+                        "Frontend Developer",
+                        "Building Clean UI",
+                        "Future Full Stack Developer",
+                        "Happy scrolling !",
+                      ]}
+                      typingSpeed={75}
+                      pauseDuration={1500}
+                      showCursor={true}
+                      cursorCharacter="|"
+                    />
                   </h1>
-                  <h3 className="text-lg md:text-1xl text-white/70 font-medium text-justify max-w-2xl ">
+                  <h5 id="home" className="text-lg md:text-1xl text-white/70 font-medium text-justify w-2xl max-w-130 ">
                     Passionate Frontend Developer with a strong focus on
                     crafting intuitive, responsive, and visually engaging user
                     interfaces. I bring ideas to life through clean, efficient
                     code and seamless user experiences. Currently expanding my
                     expertise toward full-stack development to create end-to-end
                     solutions that deliver both functionality and great design.
-                  </h3>
+                  </h5>
                 </div>
 
                 {/* Buttons Row */}
@@ -160,7 +185,8 @@ export default function Home() {
                     My Project
                   </a>
                   <a
-                    href="#"
+                    href="/assets/For_Download/CV_Yusup.png"
+                    download
                     className="inline-flex items-center justify-center px-6 py-2.5 border border-white/20 bg-white/5 rounded-full text-white hover:bg-white/10 transition-colors"
                   >
                     <span>Download CV</span>
@@ -184,7 +210,8 @@ export default function Home() {
                 {/* Social Media Buttons - Below Text */}
                 <div className="flex justify-start space-x-4 pt-4">
                   <a
-                    href="#"
+                    href="https://github.com/yusuppppppppp"
+                    target="_blank"
                     className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
                   >
                     <svg
@@ -201,7 +228,8 @@ export default function Home() {
                     </svg>
                   </a>
                   <a
-                    href="#"
+                    href="https://www.instagram.com/alvaretttt?igsh=YXo4aWJqbWppanJp"
+                    target="_blank"
                     className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
                   >
                     <svg
@@ -218,20 +246,8 @@ export default function Home() {
                     </svg>
                   </a>
                   <a
-                    href="#"
-                    className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
-                  >
-                    <svg
-                      className="w-5 h-5 text-white"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                    </svg>
-                  </a>
-                  <a
-                    href="#"
+                    href="https://www.linkedin.com/in/yusuf-satria-793575336?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                    target="_blank"
                     className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
                   >
                     <svg
@@ -250,9 +266,37 @@ export default function Home() {
                 </div>
               </div>
             </div>
+
+            {/* Profile Card */}
+            <div className="mt-36 md:mb-40 relative z-0">
+              <div className="relative z-0">
+                <ProfileCard
+                  name="Yusuf"
+                  title="Frontend Developer"
+                  contactText="Contact Me"
+                  avatarUrl="/assets/profile.png"
+                  showUserInfo={false}
+                  enableTilt={true}
+                  enableMobileTilt={true}
+                  onContactClick={() => console.log("Contact clicked")}
+                />
+              </div>
+            </div>
           </div>
+        </div>
+      </section>
+
+       {/* ABOUT SECTION */}
+      <section id="about" className="relative py-20 overflow-hidden bg-black">
+        <div className="container mx-auto px-4 text-center">  
+          <LayoutTextFlip/>
         </div>
       </section>
     </div>
   );
 }
+
+      
+     
+
+
