@@ -1,8 +1,9 @@
 "use client";
 import dynamic from "next/dynamic";
+import { useEffect } from 'react';
+import { motion } from 'framer-motion';
 import ProfileCard from "./components/ProfileCard/ProfileCard";
 import TextType from "./components/TextType/TextType";
-import { LayoutTextFlip } from "./components/UI/layout-text-flip";
 import Aurora from "./components/Aurora/Aurora";
 
 const ColorBends = dynamic(() => import("./components/ColorBends/ColorBends"), {
@@ -10,8 +11,23 @@ const ColorBends = dynamic(() => import("./components/ColorBends/ColorBends"), {
 });
 
 export default function Home() {
+  useEffect(() => {
+    // Disable scrolling
+    document.body.style.overflow = 'hidden';
+    
+    // Cleanup function to re-enable scrolling when component unmounts
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen text-white relative ">
+    <motion.div 
+      className="h-screen w-full text-white relative flex items-center justify-center"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+    >
       <div className="fixed inset-0 -z-10">
         <Aurora
           className="w-full h-full"
@@ -22,7 +38,21 @@ export default function Home() {
         />
       </div>
       {/* HERO SECTION */}
-      <section className="relative m-2 min-h-screen overflow-hidden rounded-[28px] border border-white/10 md:m-4 ">
+      <motion.section 
+        className="relative w-full h-full overflow-hidden"
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: { opacity: 0 },
+          visible: {
+            opacity: 1,
+            transition: {
+              when: "beforeChildren",
+              staggerChildren: 0.2
+            }
+          }
+        }}
+      >
         {/* 🔥 Background ColorBends (Hero Background) */}
         <div className="absolute inset-0 z-0" aria-hidden>
           {/* Base layer (opaque) */}
@@ -130,39 +160,37 @@ export default function Home() {
 
         {/* HERO CONTENT */}
         <div className="relative z-20 mx-auto max-w-5xl px-4 h-screen flex flex-col">
-          {/* NAV */}
-          <nav className="mt-7 ml-40 fixed flex align-center items-center justify-between rounded-full border border-white/10 bg-white/5 px-6 py-4 backdrop-blur w-170 z-50">
-            <div className="flex items-center gap-3">
-              <span className="font-semibold tracking-tight">
-                My Portofolio
-              </span>
-            </div>
-            <div className="flex gap-6 text-sm text-white/80">
-              <a href="#" className="hover:text-white">
-                Home
-              </a>
-              <a href="#about" className="hover:text-white">
-                About
-              </a>
-              <a href="#" className="hover:text-white">
-                My Skill
-              </a>
-              <a href="#" className="hover:text-white">
-                My Project
-              </a>
-            </div>
-          </nav>
 
           {/* HERO LAYOUT */}
           <div className="flex-1 flex flex-col md:flex-row items-center justify-between mt-17 gap-12">
             {/* Text Content */}
             <div className="w-full md:w-1/2 text-start">
               <div className="space-y-6">
-                <div className="space-y-2">
-                  <h2 className="text-lg md:text-xl text-white/70 font-medium">
+                <motion.div 
+                  className="space-y-2"
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { 
+                      opacity: 1, 
+                      y: 0,
+                      transition: { duration: 0.6, ease: "easeOut" }
+                    }
+                  }}
+                >
+                  <motion.h2 
+                    className="text-lg md:text-xl text-white/70 font-medium"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.3, duration: 0.5 }}
+                  >
                     Hello, I'm Yusuf.
-                  </h2>
-                  <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+                  </motion.h2>
+                  <motion.h1 
+                    className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4, duration: 0.6 }}
+                  >
                     <TextType
                       text={[
                         "Frontend Developer",
@@ -175,10 +203,13 @@ export default function Home() {
                       showCursor={true}
                       cursorCharacter="|"
                     />
-                  </h1>
-                  <h5
+                  </motion.h1>
+                  <motion.h5
                     id="home"
-                    className="text-lg md:text-1xl text-white/70 font-medium text-justify w-2xl max-w-130 "
+                    className="text-lg md:text-1xl text-white/70 font-medium text-justify w-2xl max-w-130"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5, duration: 0.6 }}
                   >
                     Passionate Frontend Developer with a strong focus on
                     crafting intuitive, responsive, and visually engaging user
@@ -186,29 +217,40 @@ export default function Home() {
                     code and seamless user experiences. Currently expanding my
                     expertise toward full-stack development to create end-to-end
                     solutions that deliver both functionality and great design.
-                  </h5>
-                </div>
+                  </motion.h5>
+                </motion.div>
 
                 {/* Buttons Row */}
-                <div className="pt-4 flex space-x-4">
-                  <a
+                <motion.div 
+                  className="pt-4 flex space-x-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6, duration: 0.6 }}
+                >
+                  <motion.a
                     href="#"
                     className="inline-flex items-center justify-center px-15 py-2.5 bg-white text-gray-900 rounded-full font-medium hover:bg-gray-100 transition-colors"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     My Project
-                  </a>
-                  <a
+                  </motion.a>
+                  <motion.a
                     href="/assets/For_Download/CV_Yusup.png"
                     download
                     className="inline-flex items-center justify-center px-6 py-2.5 border border-white/20 bg-white/5 rounded-full text-white hover:bg-white/10 transition-colors"
+                    whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     <span>Download CV</span>
-                    <svg
+                    <motion.svg
                       className="w-4 h-4 ml-2"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
                       xmlns="http://www.w3.org/2000/svg"
+                      animate={{ y: [0, 2, 0] }}
+                      transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
                     >
                       <path
                         strokeLinecap="round"
@@ -216,15 +258,21 @@ export default function Home() {
                         strokeWidth={2}
                         d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
                       />
-                    </svg>
-                  </a>
-                </div>
+                    </motion.svg>
+                  </motion.a>
+                </motion.div>
 
                 {/* Social Media Buttons - Below Text */}
-                <div className="flex justify-start space-x-4 pt-4">
+                <motion.div 
+                  className="flex justify-start space-x-4 pt-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.7, duration: 0.6 }}
+                >
                   <a
                     href="https://github.com/yusuppppppppp"
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
                   >
                     <svg
@@ -276,12 +324,31 @@ export default function Home() {
                       />
                     </svg>
                   </a>
-                </div>
+                </motion.div>
               </div>
             </div>
 
             {/* Profile Card */}
-            <div className="mt-36 md:mb-40 relative z-0">
+            <motion.div 
+              className="mt-36 md:mb-40 relative z-0"
+              initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
+              animate={{ 
+                opacity: 1, 
+                scale: 1, 
+                rotate: 0,
+                transition: { 
+                  delay: 0.4,
+                  duration: 0.8,
+                  type: "spring",
+                  stiffness: 100,
+                  damping: 10
+                }
+              }}
+              whileHover={{ 
+                y: -10,
+                transition: { duration: 0.3 }
+              }}
+            >
               <div className="relative z-0">
                 <ProfileCard
                   name="Yusuf"
@@ -294,35 +361,10 @@ export default function Home() {
                   onContactClick={() => console.log("Contact clicked")}
                 />
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
-
-      {/* ABOUT SECTION */}
-      <section id="about" className="relative py-20 overflow-hidden">
-        <div className="container relative z-10 mx-auto px-4 text-center">
-          <LayoutTextFlip />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-        </div>
-      </section>
-    </div>
-  );
+      </motion.section>
+      </motion.div> 
+    );
 }
