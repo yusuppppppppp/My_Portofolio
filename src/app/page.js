@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import ProfileCard from "./components/ProfileCard/ProfileCard";
 import TextType from "./components/TextType/TextType";
 import { LayoutTextFlip } from "./components/UI/layout-text-flip";
+import Aurora from "./components/Aurora/Aurora";
 
 const ColorBends = dynamic(() => import("./components/ColorBends/ColorBends"), {
   ssr: false,
@@ -10,9 +11,18 @@ const ColorBends = dynamic(() => import("./components/ColorBends/ColorBends"), {
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen text-white relative ">
+      <div className="fixed inset-0 -z-10">
+        <Aurora
+          className="w-full h-full"
+          colorStops={["#1B3C53", "#234C6A", "#456882"]}
+          blend={1}
+          amplitude={1.0}
+          speed={0.5}
+        />
+      </div>
       {/* HERO SECTION */}
-      <section className="relative m-2 min-h-screen overflow-hidden rounded-[28px] border border-white/10 md:m-4">
+      <section className="relative m-2 min-h-screen overflow-hidden rounded-[28px] border border-white/10 md:m-4 ">
         {/* 🔥 Background ColorBends (Hero Background) */}
         <div className="absolute inset-0 z-0" aria-hidden>
           {/* Base layer (opaque) */}
@@ -166,7 +176,10 @@ export default function Home() {
                       cursorCharacter="|"
                     />
                   </h1>
-                  <h5 id="home" className="text-lg md:text-1xl text-white/70 font-medium text-justify w-2xl max-w-130 ">
+                  <h5
+                    id="home"
+                    className="text-lg md:text-1xl text-white/70 font-medium text-justify w-2xl max-w-130 "
+                  >
                     Passionate Frontend Developer with a strong focus on
                     crafting intuitive, responsive, and visually engaging user
                     interfaces. I bring ideas to life through clean, efficient
@@ -286,17 +299,30 @@ export default function Home() {
         </div>
       </section>
 
-       {/* ABOUT SECTION */}
-      <section id="about" className="relative py-20 overflow-hidden bg-black">
-        <div className="container mx-auto px-4 text-center">  
-          <LayoutTextFlip/>
+      {/* ABOUT SECTION */}
+      <section id="about" className="relative py-20 overflow-hidden">
+        <div className="container relative z-10 mx-auto px-4 text-center">
+          <LayoutTextFlip />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
         </div>
       </section>
     </div>
   );
 }
-
-      
-     
-
-
