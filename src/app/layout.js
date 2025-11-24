@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
               Home
             </Link>
             <Link href="/about" className="hover:text-white">
-              About
+              About Me
             </Link>
             <Link href="#" className="hover:text-white">
               My Skill
